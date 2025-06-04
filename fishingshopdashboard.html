@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | MG SEA SPORT AND ENTERPRISE</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #E0F7FA; /* Light cyan text */
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 44, 77, 0.4); /* Dark blue overlay for aquatic theme */
+            z-index: -1;
+        }
+
+        .dashboard-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly more transparent */
+            backdrop-filter: blur(12px); /* Enhanced frosted glass effect */
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 44, 77, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #E0F7FA; /* Light cyan for text */
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 44, 77, 0.4);
+            font-size: 2.2em;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 44, 77, 0.4);
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: rgba(0, 96, 100, 0.9); /* Dark teal button */
+            color: #E0F7FA;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 44, 77, 0.3);
+        }
+
+        a:hover {
+            background-color: rgba(0, 188, 212, 0.9); /* Lighter cyan on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 44, 77, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome to MG SEA SPORT AND ENTERPRISE!</h1>
+        <p>You are now logged in to our fishing equipment shop.</p>
+        <a href="index.html">Continue to Shop</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | MG SEA SPORT AND ENTERPRISE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #006064; /* Dark teal */
+            --secondary: #00BCD4; /* Cyan */
+            --light: #E0F7FA; /* Light cyan */
+            --dark-overlay: rgba(0, 44, 77, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--light);
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--dark-overlay);
+            z-index: -1;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 44, 77, 0.3);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 44, 77, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        nav {
+            background-color: rgba(0, 96, 100, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 44, 77, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 44, 77, 0.6), rgba(0, 44, 77, 0.6)), 
+                        url('https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--light);
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 20px rgba(0, 44, 77, 0.3);
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 44, 77, 0.4);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filters {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filters select, .filters input {
+            padding: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .filters button {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filters button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 44, 77, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 44, 77, 0.4);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+            text-shadow: 1px 1px 2px rgba(0, 44, 77, 0.4);
+        }
+
+        .product-info p {
+            color: var(--light);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 44, 77, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 44, 77, 0.4);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 44, 77, 0.4);
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+      <h1><i class="fas fa-fish"></i> MG SEA SPORT AND ENTERPRISE</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="shoppage.html" class="active"><i class="fas fa-store"></i> Shop</a></li>
+            <li><a href="shopping cart.html"><em class="fas fa-shopping-cart"></em> Cart</a></li>
+            <li><a href="ABOUT US.html"><em class="fas fa-envelope"></em> Contact Us</a></li>
+        </ul>
+    </nav>
+
+<main>
+        <section class="hero">
+            <h2>Explore Our Fishing Gear</h2>
+            <p>Browse our premium collection of fishing rods, reels, tackle, and accessories to elevate your fishing experience.</p>
+        </section>
+
+        <div class="filters">
+            <select id="categoryFilter">
+                <option value="all">All Categories</option>
+                <option value="rods">Fishing Rods</option>
+                <option value="reels">Reels</option>
+                <option value="tackle">Tackle & Bait</option>
+                <option value="accessories">Accessories</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Search products...">
+            <button onclick="filterProducts()">Filter</button>
+        </div>
+
+  <div class="product-grid" id="productGrid">
+            <div class="product-card" data-category="rods">
+                <img src="images2/rod.jpeg" alt="Pro Angler Rod">
+                <div class="product-info">
+                  <h4>Pro Angler Rod</h4>
+                    <p>High-performance fishing rod with sensitive tip and durable construction.</p>
+                  <span class="price">RM499</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+    <div class="product-card" data-category="reels">
+                <img src="images2/reel.jpeg" alt="Ocean Master Reel">
+                <div class="product-info">
+                    <h4>Ocean Master Reel</h4>
+                    <p>Smooth drag system with corrosion-resistant components for saltwater fishing.</p>
+                  <span class="price">RM319</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+    <div class="product-card" data-category="tackle">
+                <img src="images2/th.jpeg" alt="PowerLine Braided Fishing Line">
+                <div class="product-info">
+                  <h4>PowerLine Braided Fishing Line – 300m</h4>
+                    <p>Extra-strong braided line for long-distance casting and high tension.</p>
+                  <span class="price">RM90</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="tackle">
+                <img src="images2/th (1).jpeg" alt="GlowNight LED Fishing Bobbers">
+                <div class="product-info">
+                    <h4>GlowNight LED Fishing Bobbers (2pcs)</h4>
+                    <p>Night fishing bobbers that glow in the dark – perfect visibility at night.</p>
+                    <span class="price">RM45</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="tackle">
+                <img src="images2/th (2).jpeg" alt="TacklePro 3-Layer Tackle Box">
+                <div class="product-info">
+                    <h4>TacklePro 3-Layer Tackle Box</h4>
+                    <p>Spacious, water-resistant tackle box with adjustable compartments.</p>
+                    <span class="price">RM119</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="tackle">
+                <img src="images2/th (3).jpeg" alt="BaitMate Live Worm Bait">
+                <div class="product-info">
+                    <h4>BaitMate Live Worm Bait (20pcs)</h4>
+                    <p>Realistic soft baits that mimic live worms – ideal for freshwater fishing.</p>
+                    <span class="price">RM24</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (4).jpeg" alt="CastMaster Foldable Fishing Net">
+                <div class="product-info">
+                    <h4>CastMaster Foldable Fishing Net</h4>
+                    <p>Compact and lightweight folding net – easy to carry, strong frame.</p>
+                    <span class="price">RM85</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (5).jpeg" alt="AllWeather Fishing Hat">
+                <div class="product-info">
+                    <h4>AllWeather Fishing Hat with Neck Cover</h4>
+                    <p>UV-protection hat with breathable fabric and removable neck flap.</p>
+                    <span class="price">RM25</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="tackle">
+                <img src="images2/th (6).jpeg" alt="QuickRig Hook Set">
+                <div class="product-info">
+                    <h4>QuickRig Hook Set (50pcs)</h4>
+                    <p>Assorted high-carbon steel hooks – strong, sharp, and rust-resistant.</p>
+                    <span class="price">RM57</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="tackle">
+                <img src="images2/th (7).jpeg" alt="FloatMax Adjustable Floats">
+                <div class="product-info">
+                    <h4>FloatMax Adjustable Floats (10pcs)</h4>
+                    <p>Lightweight floats for precise depth control – easy to attach.</p>
+                    <span class="price">RM22</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (8).jpeg" alt="Shimano Reel Grease">
+                <div class="product-info">
+                    <h4>Shimano Reel Grease (30ml)</h4>
+                    <p>Protects reel components from corrosion and wear.</p>
+                    <span class="price">RM15</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (9).jpeg" alt="MiniFish Digital Fishing Scale">
+                <div class="product-info">
+                    <h4>MiniFish Digital Fishing Scale (50kg max)</h4>
+                    <p>Portable scale with LCD display and hook – accurate and reliable.</p>
+                    <span class="price">RM74</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (10).jpeg" alt="SafeGrip Anti-Slip Fishing Gloves">
+                <div class="product-info">
+                    <h4>SafeGrip Anti-Slip Fishing Gloves</h4>
+                    <p>Protective gloves with strong grip for handling fish and gear.</p>
+                    <span class="price">RM18</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (11).jpeg" alt="FishFinder Portable Sonar Sensor">
+                <div class="product-info">
+                    <h4>FishFinder Portable Sonar Sensor</h4>
+                    <p>Detects fish and water depth – compatible with smartphones.</p>
+                    <span class="price">RM230</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (12).jpeg" alt="FlexiRod Holder Stand">
+                <div class="product-info">
+                    <h4>FlexiRod Holder Stand</h4>
+                    <p>Adjustable rod holders for hands-free fishing.</p>
+                    <span class="price">RM18</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+            <div class="product-card" data-category="accessories">
+                <img src="images2/th (13).jpeg" alt="FishRite Lightweight Tackle Vest">
+                <div class="product-info">
+                    <h4>FishRite Lightweight Tackle Vest</h4>
+                    <p>Multiple pockets for gear – breathable and durable.</p>
+                    <span class="price">RM89</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+  </div>
+    </main>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column; /* Stack all columns vertically */
+            align-items: center; /* Center-align the content */
+            gap: 20px; /* Add spacing between columns */
+        }
+
+        .footer-column {
+            width: 100%; /* Make each column span the full width */
+            max-width: 600px; /* Optionally limit the width for better readability */
+            text-align: left; /* Align the text to the left */
+        }
+
+        .footer-column h3 {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 5px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #ddd;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>MG SEA SPORT AND ENTERPRISE</h3>
+                <p>Your trusted source for premium fishing gear and expert advice since 2000.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shoppage.html">Shop</a></li>
+                    <li><a href="https://maps.app.goo.gl/z6ajvtVxLPaaXSr39">Fishing Locations</a></li>
+                    <li><a href="ABOUT US.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 303, Jalan Wawasan 3, Taman Wawasan, 86800 Mersing, Johor Darul Ta'zim</li>
+                    <li><i class="fas fa-phone"></i> 077991802</li>
+                    <li><i class="fas fa-envelope"></i> mgseasportenterprise@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 10AM-7PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© MG SEA SPORT AND ENTERPRISE. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+<script>
+        function filterProducts() {
+            const category = document.getElementById('categoryFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product-card');
+
+            products.forEach(product => {
+                const productCategory = product.getAttribute('data-category');
+                const productName = product.querySelector('h4').textContent.toLowerCase();
+                const matchesCategory = category === 'all' || productCategory === category;
+                const matchesSearch = productName.includes(search);
+
+                if (matchesCategory && matchesSearch) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Initial filter on page load
+        filterProducts();
+    </script>
+</body>
+</html>

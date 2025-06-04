@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | MG SEA SPORT AND ENTERPRISE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+       :root {
+            --primary: #006064; /* Dark teal */
+            --secondary: #00BCD4; /* Cyan */
+            --light: #E0F7FA; /* Light cyan */
+            --dark-overlay: rgba(0, 44, 77, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--light);
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--dark-overlay);
+            z-index: -1;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 44, 77, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 44, 77, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        nav {
+            background-color: rgba(0, 96, 100, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 44, 77, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .checkout-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 44, 77, 0.5);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        h2 {
+            color: var(--light);
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 44, 77, 0.4);
+        }
+
+        .cart-summary {
+            background: rgba(0, 96, 100, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: right;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--light);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #333;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+            font-size: 15px;
+            color: var(--light);
+        }
+
+        .radio-group input[type="radio"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            margin: 0 8px 0 0;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-group input[type="radio"]:checked {
+            border-color: var(--primary);
+            background-color: var(--primary);
+        }
+
+        .radio-group input[type="radio"]:checked::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: var(--light);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s ease;
+        }
+
+        .radio-group input[type="radio"]:hover {
+            border-color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .button {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 44, 77, 0.3);
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 44, 77, 0.4);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .qr-image {
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 6px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .note {
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--light);
+            margin-top: -10px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .error {
+            color: #D8000C;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .thank-you-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 15px 30px rgba(0, 44, 77, 0.5);
+            text-align: center;
+            z-index: 1000;
+            animation: popIn 0.3s ease-out forwards;
+        }
+
+        .thank-you-modal h3 {
+            color: var(--light);
+            margin-bottom: 15px;
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0, 44, 77, 0.4);
+        }
+
+        .thank-you-modal p {
+            color: var(--light);
+            font-size: 16px;
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+
+        .thank-you-modal .redirect-note {
+            font-size: 14px;
+            color: var(--light);
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 44, 77, 0.6);
+            z-index: 999;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 44, 77, 0.4);
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            nav ul { gap: 0.5rem; }
+            .checkout-container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+   <body>
+    <header>
+        <h1><i class="fas fa-fish"></i> MG SEA SPORT AND ENTERPRISE</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="shoppage.html"><i class="fas fa-store"></i> Shop</a></li>
+            <li><a href="shopping cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li><a href="ABOUT US.html"><em class="fas fa-envelope"></em> Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="checkout-container">
+            <h2>Complete Your Purchase</h2>
+            <div class="cart-summary" id="cartSummary"></div>
+            <form id="checkoutForm">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" required>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <label for="address">Shipping Address</label>
+                <input type="text" id="address" placeholder="Enter your address" required>
+                <label>Payment Method</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="method" value="FPX" checked onclick="togglePaymentFields()"> FPX (Online Banking)</label>
+                    <label><input type="radio" name="method" value="Card" onclick="togglePaymentFields()"> Debit / Credit Card</label>
+                    <label><input type="radio" name="method" value="TNG" onclick="togglePaymentFields()"> Touch 'n Go eWallet</label>
+                </div>
+                <div id="fpxFields">
+                    <label for="bank">Select Bank</label>
+                    <select id="bank" required>
+                        <option value="">-- Select Bank --</option>
+                        <option value="CIMB">CIMB Bank</option>
+                        <option value="RHB">RHB Bank</option>
+                        <option value="Maybank">Maybank</option>
+                        <option value="AEON">AEON Bank</option>
+                        <option value="OCBC">OCBC Bank</option>
+                    </select>
+                    <label for="fpxAcc">Account Number</label>
+                    <input type="text" id="fpxAcc" placeholder="Enter account number" required>
+                </div>
+                <div id="cardFields" class="hidden">
+                    <label for="cardNum">Card Number</label>
+                    <input type="text" id="cardNum" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+                    <label for="expiry">Expiry Date (MM/YY)</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+                    <label for="cvc">CVC</label>
+                    <input type="text" id="cvc" placeholder="3 digits" maxlength="3">
+                </div>
+                <div id="tngFields" class="hidden">
+                    <label>DuitNow QR Code</label>
+                    <img src="images/WhatsApp Image 2025-06-04 at 22.16.43_d53921b0.jpg" alt="DuitNow QR" class="qr-image">
+                    <p class="note">Scan with Touch 'n Go or DuitNow app to complete your payment.</p>
+                </div>
+                <p id="errorMessage" class="error"></p>
+                <button type="submit" class="button" id="payNowButton">Pay Now</button>
+            </form>
+        </div>
+    </main>
+
+    <div id="thankYouModal" class="thank-you-modal hidden">
+        <h3>Payment Successful!</h3>
+        <p id="thankYouDetails"></p>
+        <p class="redirect-note">Redirecting to homepage in 3 seconds...</p>
+    </div>
+    <div id="modalBackdrop" class="modal-backdrop hidden"></div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>MG SEA SPORT AND ENTERPRISE</h3>
+                <p>Your trusted source for premium fishing gear and expert advice since 2000.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../../Asas web projek latest/Asas web projek/index.html">Home</a></li>
+                    <li><a href="../../Asas web projek latest/Asas web projek/shoppage.html">Shop</a></li>
+                    <li><a href="https://maps.app.goo.gl/z6ajvtVxLPaaXSr39">Fishing Locations</a></li>
+                    <li><a href="../../Asas web projek latest/Asas web projek/ABOUT US.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="../../Asas web projek latest/Asas web projek/contact.html">Contact Us</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 303, Jalan Wawasan 3, Taman Wawasan, 86800 Mersing, Johor Darul Ta'zim</li>
+                    <li><i class="fas fa-phone"></i> 077991802</li>
+                    <li><i class="fas fa-envelope"></i> mgseasportenterprise@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 10AM-7PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© MG SEA SPORT AND ENTERPRISE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fallback if jQuery fails to load
+        if (typeof jQuery === 'undefined') {
+            console.error('jQuery not loaded, using vanilla JavaScript');
+            document.getElementById('errorMessage').innerText = 'Error: JavaScript library failed to load. Please try again later.';
+            document.getElementById('payNowButton').disabled = true;
+        }
+
+        function displayCartSummary() {
+            console.log('Displaying cart summary...');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const summaryDiv = document.getElementById('cartSummary');
+            summaryDiv.innerHTML = '';
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                summaryDiv.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('payNowButton').disabled = true;
+                console.log('Cart is empty, button disabled.');
+                return;
+            }
+
+            cart.forEach(item => {
+                const total = (item.price || 0) * (item.quantity || 1);
+                subtotal += total;
+                summaryDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name || 'Unknown Item'} x${item.quantity || 1}</span>
+                        <span>RM${total.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+
+            const shipping = 15.00;
+            const total = subtotal + shipping;
+
+            summaryDiv.innerHTML += `
+                <div class="cart-item">
+                    <span>Subtotal</span>
+                    <span>RM${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="cart-item">
+                    <span>Shipping Fee</span>
+                    <span>RM${shipping.toFixed(2)}</span>
+                </div>
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span>RM${total.toFixed(2)}</span>
+                </div>
+            `;
+        }
+
+        function togglePaymentFields() {
+            const method = document.querySelector('input[name="method"]:checked').value;
+            document.getElementById('fpxFields').classList.toggle('hidden', method !== 'FPX');
+            document.getElementById('cardFields').classList.toggle('hidden', method !== 'Card');
+            document.getElementById('tngFields').classList.toggle('hidden', method !== 'TNG');
+        }
+
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const method = document.querySelector('input[name="method"]:checked').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            errorMessage.style.display = 'none';
+            errorMessage.innerText = '';
+
+            if (cart.length === 0) {
+                errorMessage.innerText = 'Your cart is empty.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            if (!name) {
+                errorMessage.innerText = 'Please enter your full name.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errorMessage.innerText = 'Please enter a valid email address.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            if (!address) {
+                errorMessage.innerText = 'Please enter your shipping address.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            if (method === 'FPX') {
+                const bank = document.getElementById('bank').value;
+                const acc = document.getElementById('fpxAcc').value.trim();
+                if (!bank) {
+                    errorMessage.innerText = 'Please select a bank.';
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+                if (!acc) {
+                    errorMessage.innerText = 'Please enter an account number.';
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+            } else if (method === 'Card') {
+                const cardNum = document.getElementById('cardNum').value.replace(/\s/g, '');
+                const expiry = document.getElementById('expiry').value;
+                const cvc = document.getElementById('cvc').value;
+                
+                if (!/^\d{16}$/.test(cardNum)) {
+                    errorMessage.innerText = 'Please enter a valid 16-digit card number.';
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+                
+                const today = new Date();
+                const [month, year] = expiry.split('/');
+                const expiryDate = new Date(2000 + parseInt(year), parseInt(month));
+                
+                if (expiryDate < today) {
+                    errorMessage.innerText = 'Please enter a valid expiry date (MM/YY) that is not in the past.';
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+                
+                if (!/^\d{3}$/.test(cvc)) {
+                    errorMessage.innerText = 'Please enter a valid 3-digit CVC.';
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function showConfirmation() {
+            const name = document.getElementById('name').value.trim();
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const subtotal = cart.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0);
+            const total = subtotal + 15.00; // Shipping
+            const method = document.querySelector('input[name="method"]:checked').value;
+
+            document.getElementById('thankYouDetails').innerText = 
+                `Thank you, ${name}, for your purchase of RM${total.toFixed(2)} via ${method}.`;
+            
+            document.getElementById('thankYouModal').classList.remove('hidden');
+            document.getElementById('modalBackdrop').classList.remove('hidden');
+
+            setTimeout(() => {
+                localStorage.removeItem('cart');
+                window.location.href = '../../Asas web projek latest/Asas web projek/index.html';
+            }, 3000);
+        }
+
+        function handleCheckout(event) {
+            event.preventDefault();
+            
+            if (validateForm()) {
+                // Save order to localStorage
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                const order = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    address: document.getElementById('address').value.trim(),
+                    cart: JSON.parse(localStorage.getItem('cart')),
+                    method: document.querySelector('input[name="method"]:checked').value,
+                    date: new Date().toISOString()
+                };
+                orders.push(order);
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                // Show confirmation
+                showConfirmation();
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCartSummary();
+            togglePaymentFields();
+            
+            // Payment method change listeners
+            document.querySelectorAll('input[name="method"]').forEach(radio => {
+                radio.addEventListener('change', togglePaymentFields);
+            });
+            
+            // Form submission
+            document.getElementById('checkoutForm').addEventListener('submit', handleCheckout);
+            
+            // Card number formatting
+            document.getElementById('cardNum').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '');
+                if (value.length > 0) {
+                    value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                }
+                e.target.value = value;
+            });
+            
+            // Expiry date formatting
+            document.getElementById('expiry').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                }
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>

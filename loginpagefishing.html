@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | Reel Deal Fishing</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 44, 77, 0.4); /* Dark blue overlay for aquatic theme */
+      z-index: -1;
+    }
+
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.2); /* Slightly more transparent */
+      backdrop-filter: blur(12px); /* Enhanced frosted glass effect */
+      -webkit-backdrop-filter: blur(12px);
+      padding: 40px 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 44, 77, 0.3);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+
+    h1.logo {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #006064, #00BCD4); /* Cyan to teal gradient */
+      color: #E0F7FA; /* Light cyan text */
+      padding: 15px 25px;
+      border-radius: 15px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 44, 77, 0.4);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transition: transform 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    h1.logo:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    h1.logo::before {
+      content: '\f6d3'; /* Font Awesome fish icon */
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #E0F7FA; /* Light cyan for contrast */
+      margin-right: 8px;
+      font-size: 24px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #E0F7FA; /* Light cyan for text */
+      text-shadow: 1px 1px 3px rgba(0, 44, 77, 0.4);
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 6px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="email"]:focus {
+      background-color: white;
+      border: 1px solid #006064; /* Dark teal border */
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 96, 100, 0.5);
+    }
+
+    .button {
+      width: 100%;
+      background-color: rgba(0, 96, 100, 0.9); /* Dark teal button */
+      color: #E0F7FA;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: rgba(0, 188, 212, 0.9); /* Lighter cyan on hover */
+      transform: translateY(-2px);
+    }
+
+    .switch-button {
+      background: none;
+      border: none;
+      color: #E0F7FA;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: underline;
+      text-shadow: 1px 1px 2px rgba(0, 44, 77, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      h1.logo {
+        font-size: 24px;
+        padding: 12px 20px;
+      }
+      h1.logo::before {
+        font-size: 18px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Logo -->
+  <h1 class="logo">
+    <a href="loginpagefishing.html">MG SEA SPORT AND ENTERPRISE</a>
+  </h1>
+
+  <!-- Login Form -->
+  <div class="login-box" id="loginForm">
+    <h2>Login</h2>
+    <form onsubmit="return loginUser()">
+      <input type="text" id="loginUsername" placeholder="Username" required /><br />
+      <input type="password" id="loginPassword" placeholder="Password" required /><br />
+      <button type="submit" class="button">Login</button>
+      <button type="button" class="switch-button" onclick="showRegisterForm()">Don't have an account? Register</button>
+      <button type="button" class="switch-button" onclick="showRecoveryForm()">Forgot password?</button>
+    </form>
+  </div>
+
+  <!-- Registration Form -->
+  <div class="login-box hidden" id="registerForm">
+    <h2>Register</h2>
+    <form onsubmit="return registerUser()">
+      <input type="text" id="regUsername" placeholder="Username" required /><br />
+      <input type="email" id="regEmail" placeholder="Email (for recovery)" required /><br />
+      <input type="password" id="regPassword" placeholder="Password" required /><br />
+      <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required /><br />
+      <button type="submit" class="button">Register</button>
+      <button type="button" class="switch-button" onclick="showLoginForm()">Already have an account? Login</button>
+    </form>
+  </div>
+
+  <!-- Password Recovery Form -->
+  <div class="login-box hidden" id="recoveryForm">
+    <h2>Password Recovery</h2>
+    <form onsubmit="return recoverPassword()">
+      <input type="text" id="recoverUsername" placeholder="Username" required /><br />
+      <input type="email" id="recoverEmail" placeholder="Registered Email" required /><br />
+      <button type="submit" class="button">Verify Account</button>
+      <button type="button" class="switch-button" onclick="showLoginForm()">Back to Login</button>
+    </form>
+  </div>
+
+  <!-- Password Change Form -->
+  <div class="login-box hidden" id="changePasswordForm">
+    <h2>Reset Your Password</h2>
+    <form onsubmit="return changePassword()">
+      <input type="hidden" id="changeUsername" />
+      <input type="hidden" id="changeEmail" />
+      <input type="password" id="newPassword" placeholder="New Password" required /><br />
+      <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" required /><br />
+      <button type="submit" class="button">Set New Password</button>
+      <button type="button" class="switch-button" onclick="showLoginForm()">Back to Login</button>
+    </form>
+  </div>
+
+  <script>
+    // Initialize "database" in localStorage if not exists
+    if (!localStorage.getItem('users')) {
+      localStorage.setItem('users', JSON.stringify({}));
+    }
+
+    // Toggle between forms
+    function showRegisterForm() {
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('recoveryForm').classList.add('hidden');
+      document.getElementById('changePasswordForm').classList.add('hidden');
+      document.getElementById('registerForm').classList.remove('hidden');
+    }
+
+    function showLoginForm() {
+      document.getElementById('registerForm').classList.add('hidden');
+      document.getElementById('recoveryForm').classList.add('hidden');
+      document.getElementById('changePasswordForm').classList.add('hidden');
+      document.getElementById('loginForm').classList.remove('hidden');
+    }
+
+    function showRecoveryForm() {
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('registerForm').classList.add('hidden');
+      document.getElementById('changePasswordForm').classList.add('hidden');
+      document.getElementById('recoveryForm').classList.remove('hidden');
+    }
+
+    function showChangePasswordForm() {
+      console.log('Attempting to show changePasswordForm');
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('registerForm').classList.add('hidden');
+      document.getElementById('recoveryForm').classList.add('hidden');
+      document.getElementById('changePasswordForm').classList.remove('hidden');
+      console.log('changePasswordForm should now be visible');
+    }
+
+    // Login function - Allow any non-empty username and password
+    function loginUser() {
+      const username = document.getElementById("loginUsername").value;
+      const password = document.getElementById("loginPassword").value;
+
+      if (username && password) {
+        console.log('Login successful for username:', username);
+        alert("Login successful!");
+        window.location.href = "fishingshopdashboard.html";
+      } else {
+        alert("Please enter both username and password.");
+      }
+      return false;
+    }
+
+    // Registration function
+    function registerUser() {
+      const username = document.getElementById("regUsername").value;
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+      const confirmPassword = document.getElementById("regConfirmPassword").value;
+      const users = JSON.parse(localStorage.getItem('users'));
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false;
+      }
+
+      if (users[username]) {
+        alert("Username already exists!");
+        return false;
+      }
+
+      users[username] = { password, email };
+      localStorage.setItem('users', JSON.stringify(users));
+      alert("Registration successful! Please login.");
+      showLoginForm();
+      return false;
+    }
+
+    // Password recovery function - Allow any non-empty username and email
+    function recoverPassword() {
+      console.log('recoverPassword function called');
+      const username = document.getElementById("recoverUsername").value;
+      const email = document.getElementById("recoverEmail").value;
+
+      console.log('Username:', username, 'Email:', email);
+
+      if (username && email) {
+        console.log('User verified, setting changeUsername and changeEmail');
+        document.getElementById("changeUsername").value = username;
+        document.getElementById("changeEmail").value = email;
+        alert("Account verified! Please set a new password.");
+        showChangePasswordForm();
+      } else {
+        alert("Please enter both username and email.");
+      }
+      return false;
+    }
+
+    // Password change function
+    function changePassword() {
+      console.log('changePassword function called');
+      const username = document.getElementById("changeUsername").value;
+      const email = document.getElementById("changeEmail").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmNewPassword = document.getElementById("confirmNewPassword").value;
+      const users = JSON.parse(localStorage.getItem('users'));
+
+      if (newPassword !== confirmNewPassword) {
+        alert("New passwords do not match!");
+        return false;
+      }
+
+      if (username) {
+        users[username] = { password: newPassword, email };
+        localStorage.setItem('users', JSON.stringify(users));
+        alert("Password updated successfully! Please login with your new password.");
+        showLoginForm();
+        return false;
+      } else {
+        alert("Error updating password. Please try again.");
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>
